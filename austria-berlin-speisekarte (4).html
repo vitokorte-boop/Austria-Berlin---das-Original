@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Speisekarte – Austria Berlin, das Original</title>
+<style>
+:root{
+  --bg:#f4ecdc; --surface:#fbf6ea; --ink:#2a1d14; --muted:#6a5644; --line:#d2c19d;
+  --wood:#2b1c12; --gold:#dfc15e; --accent:#7a5410; --price:#8a1f1a;
+  --nav-bg:#3a2618; --nav-ink:#f1e6cf; --nav-on-bg:#dfc15e; --nav-on-ink:#2b1c12;
+  --focus:#1a5fb4; --focus-dark:#ffd766;
+}
+@media (prefers-color-scheme: dark){
+  :root:not(.light){
+    --bg:#16100b; --surface:#20170f; --ink:#f0e4cc; --muted:#c1ad8f; --line:#4a3826;
+    --wood:#0f0a06; --accent:#dfc15e; --price:#ecc96b;
+    --nav-bg:#241810; --nav-ink:#f1e6cf; --nav-on-bg:#dfc15e; --nav-on-ink:#1c120a;
+    --focus:#8ab4ff;
+  }
+}
+:root.dark{
+  --bg:#16100b; --surface:#20170f; --ink:#f0e4cc; --muted:#c1ad8f; --line:#4a3826;
+  --wood:#0f0a06; --accent:#dfc15e; --price:#ecc96b;
+  --nav-bg:#241810; --nav-ink:#f1e6cf; --nav-on-bg:#dfc15e; --nav-on-ink:#1c120a;
+  --focus:#8ab4ff;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.55 Georgia,"Palatino Linotype",Palatino,"Times New Roman",serif}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:3px}
+.top :focus-visible,.nav :focus-visible{outline-color:var(--focus-dark)}
+
+/* Kopfbereich: dunkles Holz, weißes Logo, Gold */
+.top{position:relative;overflow:hidden;text-align:center;color:#f4ead4;padding:3.5rem 1.25rem 2.75rem;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 2px,transparent 2px 46px),var(--wood);
+  border-bottom:4px solid var(--gold)}
+.hero-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.top::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;
+  background:linear-gradient(rgba(27,17,10,.35),rgba(27,17,10,.72))}
+.logo{position:relative;z-index:2;width:min(190px,52vw);height:auto;display:block;margin:0 auto .9rem}
+.top h1,.top p{position:relative;z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.top h1{margin:0;font-size:clamp(2rem,7vw,3rem);font-weight:400;font-style:italic;color:var(--gold);letter-spacing:.01em}
+.top p{margin:.4rem 0 0;font-size:1rem;color:#f0e4c8}
+.mode{position:absolute;z-index:3;top:.75rem;right:.75rem;background:rgba(0,0,0,.35);color:#f4ead4;border:1px solid var(--gold);
+  border-radius:999px;padding:.4rem .95rem;font:inherit;font-size:.9rem;cursor:pointer;min-height:44px}
+.mode:hover{background:var(--gold);color:#2b1c12}
+
+/* Sticky Kategorien-Leiste */
+.nav{position:sticky;top:0;z-index:20;background:var(--nav-bg);border-bottom:1px solid #00000055}
+.navin{position:relative;display:flex;gap:.4rem;overflow-x:auto;padding:.55rem 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.navin::-webkit-scrollbar{display:none}
+.navin button{flex:none;white-space:nowrap;background:transparent;color:var(--nav-ink);border:1px solid transparent;
+  border-radius:999px;padding:.45rem 1.05rem;min-height:44px;font:inherit;font-size:1rem;cursor:pointer}
+.navin button:hover{border-color:var(--gold)}
+.navin button[aria-current="true"]{background:var(--nav-on-bg);color:var(--nav-on-ink);font-weight:700}
+@media (min-width:640px){.navin{justify-content:center}}
+
+main{max-width:760px;margin:0 auto;padding:0 1.25rem 2rem}
+section{scroll-margin-top:4.25rem;padding-top:2.25rem}
+h2{margin:0 0 1.1rem;font-size:clamp(1.65rem,5.5vw,2.2rem);font-weight:400;font-style:italic;color:var(--accent);
+  padding-bottom:.55rem;border-bottom:1px solid var(--line);position:relative}
+h2::after{content:"";position:absolute;left:0;bottom:-2px;width:3.5rem;height:3px;background:var(--gold)}
+ul.list{list-style:none;margin:0;padding:0}
+.item{display:flex;gap:1rem;align-items:flex-start;padding:.85rem 0}
+.item + .item{border-top:1px dotted var(--line)}
+.txt{flex:1;min-width:0}
+.row{display:flex;align-items:baseline;gap:.5rem}
+.row h3{margin:0;font-size:1.1rem;font-weight:700;line-height:1.3}
+.lead{flex:1;min-width:.75rem;border-bottom:2px dotted var(--line);transform:translateY(-.3rem)}
+.price{flex:none;white-space:nowrap;color:var(--price);font-weight:700}
+.desc{margin:.2rem 0 0;color:var(--muted);font-size:.98rem}
+.desc i{font-style:italic}
+.tag{display:inline-block;margin-left:.45rem;padding:0 .5rem;border:1px solid var(--accent);border-radius:999px;
+  color:var(--accent);font-size:.78rem;font-weight:400;vertical-align:.1em}
+.photos{display:grid;grid-template-columns:1fr;gap:1rem;margin:0 0 .5rem}
+.pcard{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.pcard img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:3px solid var(--gold);background:var(--surface)}
+.pbody{padding:.75rem .9rem .9rem}
+@media (min-width:640px){
+  .photos{grid-template-columns:repeat(var(--n,3),1fr)}
+  .pcard img{aspect-ratio:4/3}
+  .pbody .row{flex-wrap:wrap}
+}
+
+/* Info */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.25rem 1.25rem 1.4rem;margin-top:.25rem}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1.25rem;margin:0 0 1.25rem}
+.hours dt{font-weight:700}
+.hours dd{margin:0;color:var(--muted)}
+.info address{font-style:normal;margin-bottom:1rem}
+.info a{color:var(--accent);font-weight:700}
+.btn{display:inline-block;background:var(--wood);color:#f4ead4!important;border:2px solid var(--gold);border-radius:999px;
+  padding:.65rem 1.5rem;text-decoration:none;font-weight:700}
+.btn:hover{background:var(--gold);color:#2b1c12!important}
+.note{margin:1.25rem 0 0;color:var(--muted);font-size:.95rem}
+footer{max-width:760px;margin:0 auto;padding:0 1.25rem 3rem;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<header class="top">
+  <img class="hero-img" src="https://austria-berlin.de/wp-content/uploads/2020/07/austria-wiener-schnitzel-fb.jpg" alt="" referrerpolicy="no-referrer">
+  <button class="mode" id="mode" type="button" aria-pressed="false">Dunkel</button>
+  <img class="logo" src="https://austria-berlin.de/wp-content/uploads/2023/03/Austria-Logo-2023-white-300x278.png" alt="Austria Berlin – das Original" referrerpolicy="no-referrer">
+  <h1>Speisekarte</h1>
+  <p>Dahoam – österreichische Küche in Berlin Kreuzberg, seit 1993</p>
+</header>
+
+<nav class="nav" aria-label="Kategorien"><div class="navin" id="navin"></div></nav>
+
+<main id="menu"></main>
+
+<footer>Darstellung der Speisekarte von austria-berlin.de. Angebot und Preise bitte vor Ort prüfen.</footer>
+
+<script>
+(function(){
+  var IMG="https://austria-berlin.de/wp-content/uploads/";
+  // [Name, Preis, Beschreibung, Bild, Hinweis(Größen), Tag]
+  var MENU=[
+   {id:"vorspeisen",t:"Vorspeisen",photos:[[IMG+"2023/03/Restaurant-Austria-Berlin-2023-15.jpg","Gebackene Ziegenkäsepraline"],[IMG+"2020/07/austria-kalbs-tatar-fb.jpg","Kalbstatar"],[IMG+"2023/03/Restaurant-Austria-Berlin-2023-10.jpg","Jausenbrettl"]],items:[
+    ["Brot","€ 6,00","Dip | Streich","","","vegan"],
+    ["Blattsalat","€ 6,50 / € 9,50","Paradeiser | Croûtons | Honigsenfdressing","","klein / groß"],
+    ["Gebackene Ziegenkäsepraline","€ 13,50","Allerlei Beete | Kräuterseitlinge | Berliner Sprossen"],
+    ["Vogerlsalat","€ 12,00","Backhendlspitzen | Stachelbeere | Kernöldressing","","auch vegan erhältlich"],
+    ["Kalbstatar","€ 14,00","Ei | Zwiebel | Senf | Kapern | Sardellen | Kren | Butter | Brot"],
+    ["Jausenbrettl","€ 16,00","Zillertaler Wurstspezialitäten | Bergkas | Butter | Kren | Brot | Eingemachtes"],
+    ["Käsejause","€ 9,50 / € 16,00","Butter | Marillenchutney | Brot","","1 Person / 2 Personen"]
+   ]},
+   {id:"suppen",t:"Suppen",items:[
+    ["Rinderbouillon","€ 8,00","wahlweise Kräuterfritatten oder Kaspressknödel"],
+    ["Gemüsebouillon","€ 8,00","wahlweise Kräuterfrittaten, Kaspressknödel oder Backerbsen","","","vegan"]
+   ]},
+   {id:"hauptspeisen",t:"Hauptspeisen",photos:[[IMG+"2023/03/Restaurant-Austria-Berlin-2023-21.jpg","Wiener Schnitzel (Kalb)"],[IMG+"2023/03/Restaurant-Austria-Berlin-2023-08.jpg","Kalbstafelspitz"]],items:[
+    ["Tiroler Kasspatzn","€ 17,00","Röstzwiebeln | Blattsalat"],
+    ["Spinatknödel","€ 17,00","Paradeiser | Nussbutter | Babyspinat | Bergkäse"],
+    ["Wildkrakauer","€ 20,00","Krautsalat | Wald und Wiesenkräuter | Preiselbeersenf"],
+    ["Backhendl","€ 21,00","österreichisches Landhendl | Marille | Vogerlsalat | Erdäpfelsalat"],
+    ["Hirschgulasch","€ 26,50","von Richard’s Wild | Semmelknödel | Pastinake | Wildpreiselbeere"],
+    ["Tiroler Bachsaibling","€ 28,50","Eierschwammerl | Erdäpfel | Spinat | Rieslingschaum"],
+    ["Kalbstafelspitz","€ 25,50","Wurzelwerk | Bouillon | Babyspinat | Kren"],
+    ["Veganes Schnitzel","€ 21,00","Erdäpfelsalat | Gurkensalat","","","vegan"],
+    ["Schnitzel „Wiener Art“","€ 22,00","vom Susländer Schwein | Erdäpfelsalat | Gurkensalat"],
+    ["Wiener Schnitzel (Kalb)","€ 25,00 / € 29,50","Erdäpfelsalat | Gurkensalat"],
+    ["Steirischer Zwiebelrostbraten","€ 28,50","Speckfisolen | Erdäpfelpüree"]
+   ]},
+   {id:"dessert",t:"Dessert",items:[
+    ["Wiener Apfelstrudel","€ 8,00","Vanilleeis oder -soße | Schlagobers"],
+    ["Topfenknödel","€ 8,50","Marillenröster | Rosmarin"],
+    ["Sachertörtchen","€ 10,00","hausgemachtes Topfen-Marilleneis"],
+    ["Kaiserschmarrn","€ 10,00 / € 14,00","Rumrosinen | Zwetschkenröster | Apfelmus | Vanilleeis"],
+    ["Käsebrettl","€ 9,50","Butter | Marillenchutney | Brot"],
+    ["Hausgemachtes Sorbet","€ 4,00","je Kugel"]
+   ]}
+  ];
+
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  var html="", navHtml="";
+  MENU.forEach(function(sec){
+    navHtml+='<button type="button" data-target="'+sec.id+'">'+esc(sec.t)+'</button>';
+    html+='<section id="'+sec.id+'" aria-labelledby="h-'+sec.id+'"><h2 id="h-'+sec.id+'">'+esc(sec.t)+'</h2>';
+    var shown={};
+    if(sec.photos){
+      html+='<div class="photos" style="--n:'+sec.photos.length+'">';
+      sec.photos.forEach(function(p){
+        var it=null;
+        sec.items.forEach(function(x){if(x[0]===p[1])it=x;});
+        if(!it)return;
+        shown[it[0]]=true;
+        var d=it[2]?esc(it[2]).replace(/ \| /g," &nbsp;|&nbsp; "):"";
+        if(it[4])d+=(d?" &nbsp;":"")+"<i>("+esc(it[4])+")</i>";
+        html+='<article class="pcard"><img src="'+p[0]+'" alt="" loading="lazy" referrerpolicy="no-referrer">'+
+          '<div class="pbody"><div class="row"><h3>'+esc(it[0])+'</h3><span class="lead" aria-hidden="true"></span><span class="price">'+esc(it[1])+'</span></div>'+
+          (d?'<p class="desc">'+d+'</p>':'')+'</div></article>';
+      });
+      html+='</div>';
+    }
+    html+='<ul class="list">';
+    sec.items.forEach(function(it){
+      if(shown[it[0]])return;
+      var desc=it[2]?esc(it[2]).replace(/ \| /g," &nbsp;|&nbsp; "):"";
+      if(it[4]) desc+=(desc?" &nbsp;":"")+"<i>("+esc(it[4])+")</i>";
+      html+='<li class="item"><div class="txt"><div class="row"><h3>'+esc(it[0])+
+        (it[5]?'<span class="tag">'+esc(it[5])+'</span>':'')+'</h3><span class="lead" aria-hidden="true"></span><span class="price">'+esc(it[1])+'</span></div>'+
+        (desc?'<p class="desc">'+desc+'</p>':'')+'</div>'+
+        '</li>';
+    });
+    html+='</ul></section>';
+  });
+  html+='<section id="info" aria-labelledby="h-info"><h2 id="h-info">Öffnungszeiten</h2><div class="info">'+
+    '<dl class="hours">'+
+    '<dt>Montag</dt><dd>16.00 – 23.00 Uhr, Küche bis 22.00 Uhr</dd>'+
+    '<dt>Dienstag – Donnerstag</dt><dd>12.00 – 23.00 Uhr, Küche bis 22.00 Uhr</dd>'+
+    '<dt>Freitag, Samstag</dt><dd>12.00 – 24.00 Uhr, Küche bis 22.30 Uhr</dd>'+
+    '<dt>Sonntag</dt><dd>12.00 – 23.00 Uhr, Küche bis 22.30 Uhr</dd></dl>'+
+    '<address>Austria – Das Original<br>Bergmannstraße 30, 10961 Berlin<br><a href="tel:0306944440">030 / 694 44 40</a></address>'+
+    '<a class="btn" href="https://www.opentable.de/restref/client/?rid=108414&amp;rtype=ism&amp;restref=108414" target="_blank" rel="noopener">Tisch reservieren</a>'+
+    '<p class="note">Bei Unverträglichkeiten sprechen Sie bitte unser Service-Personal an. Bezahlung in bar oder mit Karte (Kredit/Debit).</p></div></section>';
+
+  var navin=document.getElementById("navin");
+  navin.innerHTML=navHtml;
+  document.getElementById("menu").innerHTML=html;
+  Array.prototype.forEach.call(document.querySelectorAll(".pcard img"),function(im){
+    im.addEventListener("error",function(){im.remove();});
+  });
+
+  /* Navigation: Buttons + scrollIntoView (kein <a href="#…">, iOS-WebView-sicher) */
+  var nav=document.querySelector(".nav");
+  var btns=Array.prototype.slice.call(navin.querySelectorAll("button"));
+  var secs=btns.map(function(b){return document.getElementById(b.getAttribute("data-target"));});
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)");
+  var lock=false,t=null;
+
+  function setActive(id){
+    btns.forEach(function(b){
+      var on=b.getAttribute("data-target")===id;
+      if(on){b.setAttribute("aria-current","true");
+        var left=b.offsetLeft-(navin.clientWidth-b.offsetWidth)/2;
+        navin.scrollTo({left:left,behavior:reduce.matches?"auto":"smooth"});
+      }else b.removeAttribute("aria-current");
+    });
+  }
+  function update(){
+    if(lock) return;
+    var off=nav.offsetHeight+24,cur=secs[0];
+    secs.forEach(function(s){if(s.getBoundingClientRect().top<=off)cur=s;});
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)cur=secs[secs.length-1];
+    setActive(cur.id);
+  }
+  function unlockLater(){clearTimeout(t);t=setTimeout(function(){lock=false;update();},200);}
+  btns.forEach(function(b){
+    b.addEventListener("click",function(){
+      var id=b.getAttribute("data-target");
+      lock=true;setActive(id);unlockLater();
+      document.getElementById(id).scrollIntoView({behavior:reduce.matches?"auto":"smooth",block:"start"});
+    });
+  });
+  window.addEventListener("scroll",function(){if(lock)unlockLater();else update();},{passive:true});
+  window.addEventListener("resize",update);
+  update();
+
+  /* Dark-Mode: System-Einstellung + manueller Umschalter */
+  var root=document.documentElement,mq=window.matchMedia("(prefers-color-scheme: dark)"),mode=document.getElementById("mode");
+  function isDark(){return root.classList.contains("dark")||(!root.classList.contains("light")&&mq.matches);}
+  function sync(){var d=isDark();mode.textContent=d?"Hell":"Dunkel";mode.setAttribute("aria-pressed",String(d));
+    mode.setAttribute("aria-label",d?"Zum hellen Design wechseln":"Zum dunklen Design wechseln");}
+  mode.addEventListener("click",function(){var d=isDark();root.classList.toggle("dark",!d);root.classList.toggle("light",d);sync();});
+  if(mq.addEventListener)mq.addEventListener("change",sync);
+  sync();
+})();
+</script>
+</body>
+</html>
